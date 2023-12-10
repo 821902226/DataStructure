@@ -2,6 +2,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <stack>
+#include <queue>
 
 using namespace std;
 
@@ -17,6 +19,10 @@ class Graph
         Graph();
 
         void info();    //打印顶点和边的信息
+
+        void dfs(); //深度优先搜索遍历图
+
+        void bfs(); //广度优先搜索遍历图
 
     private:
         int findIndex(string str);

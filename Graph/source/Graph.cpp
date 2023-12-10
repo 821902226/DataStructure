@@ -2,10 +2,10 @@
 
 Graph::Graph()
 {
-    cout<<"创建一个图"<<endl;
-    cout<<"输入顶点数：";
+    cout<<"Create a Graph"<<endl;
+    cout<<"Enter the number of vertices: ";
     cin>>this->vertex_size;
-    cout<<"输入边数：";
+    cout<<"Enter the number of edged: ";
     cin>>this->edge_size;
 
     this->vertex.resize(this->vertex_size);
@@ -15,7 +15,7 @@ Graph::Graph()
         this->edge[i].resize(this->vertex_size);
     }
     
-    cout<<"输入"<<this->vertex_size<<"个顶点："<<endl;
+    cout<<"Enter "<<this->vertex_size<<" points: "<<endl;
     for (int i = 0; i < this->vertex_size; i++)
     {
         string str;
@@ -23,7 +23,7 @@ Graph::Graph()
         this->vertex[i] = str;
     }
 
-    cout<<"输入"<<this->edge_size<<"条边：(vertex1 vertex2)"<<endl;
+    cout<<"Enter "<<this->edge_size<<" edges: (vertex1 vertex2)"<<endl;
     for (int i = 0; i < this->edge_size; i++)
     {
         string v1, v2;
@@ -51,14 +51,14 @@ int Graph::findIndex(string str)
 
 void Graph::info()
 {
-    cout<<"顶点信息如下："<<endl;
+    cout<<"The vertex information is as follows: "<<endl;
     for (int i = 0; i < this->vertex_size; i++)
     {    
         cout<<this->vertex[i]<<" ";
     }
     cout<<endl;
 
-    cout<<"边的连接关系如下："<<endl;
+    cout<<"The connection relationship of the edges is as follows: "<<endl;
     for (int i = 0; i < this->vertex_size; i++)
     {
         for (int j = 0; j < this->vertex_size; j++)
@@ -67,4 +67,65 @@ void Graph::info()
         }
         cout<<endl;
     }
+}
+
+//深度优先搜索
+void Graph::dfs()
+{
+    vector<bool> visited(this->vertex_size);
+    stack<string> s;
+    s.push(this->vertex[0]);
+    cout<<this->vertex[0]<<" ";
+    visited[0] = true;
+
+    while(!s.empty())
+    {
+        bool flag = false;
+        string top = s.top();
+        int index = findIndex(top);
+        for(int i=0; i<this->vertex_size; i++)
+        {
+            if(this->edge[index][i]&&!visited[i])
+            {
+                flag = true;
+                visited[i]=true;
+                cout<<this->vertex[i]<<" ";
+                s.push(this->vertex[i]);
+                break;
+            }
+        }
+        if(!flag)   //没有邻接点则弹出
+        {
+            s.pop();
+        }
+        
+    }
+    cout<<endl;
+}
+
+//广度优先搜索
+void Graph::bfs()
+{
+    vector<bool> visited(this->vertex_size);
+    queue<string> q;
+    q.push(this->vertex[0]);
+    cout<<this->vertex[0]<<" ";
+    visited[0] = true;
+
+    while(!q.empty())
+    {
+        string front = q.front();
+        int index = this->findIndex(front);
+        for (int i = 0; i < this->vertex_size; i++)
+        {
+            if(this->edge[index][i]&&!visited[i])
+            {
+                visited[i] = true;
+                cout<<this->vertex[i]<<" ";
+                q.push(this->vertex[i]);
+            }
+        }
+        q.pop();
+    }
+    cout<<endl;
 }

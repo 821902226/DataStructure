@@ -11,7 +11,7 @@
                 "UNICODE",
                 "_UNICODE"
             ],
-            "compilerPath": "D:\\Tools\\Mingw\\bin\\g++.exe",
+            "compilerPath": "D:\\software\\mingw\\bin\\g++.exe",
             "cStandard": "c17",
             "cppStandard": "c++17",
             "intelliSenseMode": "${default}",
