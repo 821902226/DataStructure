@@ -24,6 +24,8 @@ class Graph
 
         void bfs(); //广度优先搜索遍历图
 
+        int dijkstra(int begin, int end); //迪杰斯特拉算法求最短路径 begin:起点 end:终点
+
     private:
         int findIndex(string str);
         

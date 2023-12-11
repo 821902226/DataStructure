@@ -129,3 +129,31 @@ void Graph::bfs()
     }
     cout<<endl;
 }
+
+int Graph::dijkstra(int begin, int end)
+{
+    vector<bool> visited(this->vertex_size);
+    vector<int> dis(this->vertex_size, INT_MAX);
+    visited[begin] = true;
+    dis[begin] = 0;
+
+    queue<int> q;
+    q.push(begin); 
+
+    while(!q.empty())
+    {
+        int top = q.front();
+        q.pop();
+        visited[top] = true;
+        for (int i = 0; i < this->vertex_size; i++)
+        {
+            if(!visited[i]&&this->edge[top][i]&&this->edge[top][i]+dis[top]<dis[i])
+            {
+                dis[i] = this->edge[top][i]+dis[top];
+                q.push(i);
+            }
+        }
+        
+    }
+    return dis[end];
+}
